@@ -1,22 +1,35 @@
 window.addEventListener("load", function() {
 
     let form = document.querySelector("form");
-    let pilotName = document.querySelector("input[name=pilotName]");
-    let copilotName = document.querySelector("input[name=copilotName]");
+    let pilot = document.querySelector("input[name=pilotName]");
+    let copilot = document.querySelector("input[name=copilotName]");
     let fuelLevel = document.querySelector("input[name=fuelLevel]");
-    let cargoMass = document.querySelector("input[name=cargoMass]");
+    let cargoLevel = document.querySelector("input[name=cargoMass]");
+    const list = document.getElementById("faultyItems");
+
+    list.style.visibility = "hidden";
     
-    form.addEventListener("submit", function(event){       
+    form.addEventListener("submit", function(event){   
         
-        if (pilotName.value === "" || copilotName.value === "" || fuelLevel.value.length === 0 || cargoMass.value.length === 0){
+        formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
+        
+        if (validateInput(pilot.value) == "Empty" || validateInput(copilot.value) == "Empty" || validateInput(fuelLevel.value) == "Empty" || validateInput(cargoLevel.value) == "Empty") {
+            list.style.visibility = "hidden"; 
             alert("All fields are required!");
-            console.log(fuelLevel.value)
             event.preventDefault();
-        } else {
-            formSubmission(form, "", pilotName, copilotName, fuelLevel, cargoMass);
-            console.log(fuelLevel.value)
+        } 
+        if (validateInput(pilot.value) == "Is a Number" || validateInput(copilot.value) == "Is a Number") {
+            list.style.visibility = "hidden"; 
+            alert("Pilot and CoPilot's names should be letters only.");
             event.preventDefault();
         }
+
+        if (validateInput(fuelLevel.value) == "Not a Number" || validateInput(cargoLevel.value) == "Not a Number") {
+            list.style.visibility = "hidden"; 
+            alert("Fuel Level and Cargo Mass should be numbers only.");
+            event.preventDefault();
+        }
+        event.preventDefault();
     });
     
     
