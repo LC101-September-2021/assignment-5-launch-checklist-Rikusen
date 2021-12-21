@@ -3,7 +3,8 @@ require('isomorphic-fetch');
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
 
 
-    document.innerHTML = `
+    missiontarget = document.getElementById("missionTarget");
+    missiontarget.innerHTML = `
     <h2>Mission Destination</h2>
         <ol>
             <li>Name: ${name}</li>
@@ -17,45 +18,14 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 }
 
 function validateInput(testInput) {
-    if (testInput === ""){
-        return("empty");
-    } else if ( isNaN (testInput)){
-        return("Not a Number");
+    if (testInput === "") {
+        return "Empty";
+    } else if (isNaN(testInput) === false) {
+        return "Is a Number";
     } else {
-        return("Is a Number");
+        return "Not a Number";
     }
 }
-
-function visibility(){
-    document.getElementById("faultyItems").style.visibility = "visible"
-}
-
-function pilotsReady(name, pilotType){
-    document.getElementById(`${pilotType}`).innerHTML = `${name} is ready for takeoff!`
-}
-
-function lowFuel(){
-    document.getElementById("fuelStatus").innerHTML = `Fuel is too low for launch!`
-}
-
-function highCargo(){
-    document.getElementById("cargoStatus").innerHTML = `Cargo is too high for launch!`
-}
-
-function notReadyHeady(){
-    visibility();
-    document.getElementById("launchStatus").style.color = "red"
-    document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch!"
-}
-
-function readyHeady(){
-    visibility();
-    document.getElementById("launchStatus").style.color = "green"
-    document.getElementById("launchStatus").innerHTML = "Shuttle ready for launch!"
-}
-
-
-
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let pilotStatus = document.getElementById("pilotStatus");
@@ -114,8 +84,9 @@ async function myFetch() {
 }
 
 function pickPlanet(planets) {
-    let randomMis = Math.floor(Math.random() * planets.length);
-    return planets[randomMis]
+    let randomIndex = Math.floor(Math.random() * planets.length);
+    let currentPlanet = planets[randomIndex];
+    return currentPlanet;
 
 }
 
