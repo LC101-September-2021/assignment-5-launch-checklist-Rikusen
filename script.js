@@ -7,6 +7,7 @@ window.addEventListener("load", function() {
     let fuelLevel = document.querySelector("input[name=fuelLevel]");
     let cargoLevel = document.querySelector("input[name=cargoMass]");
     const list = document.getElementById("faultyItems");
+    let h2 = document.getElementById("launchStatus");
     
 
     list.style.visibility = "hidden";
@@ -23,6 +24,8 @@ window.addEventListener("load", function() {
         if (validateInput(pilot.value) == "Is a Number" || validateInput(copilot.value) == "Is a Number") {
             list.style.visibility = "hidden"; 
             alert("Pilot and CoPilot's names should be letters only.");
+            h2.innerHTML = "Shuttle Not Ready for Launch"; 
+            h2.style.color = "rgb(199, 37, 78)";
             event.preventDefault();
         }
 
